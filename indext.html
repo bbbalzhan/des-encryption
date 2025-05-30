@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DES Encryption Learning</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <h1 id="mainTitle">DES Encryption Learning</h1>
+    
+  </header>
+
+  <div class="content">
+    <!-- Страница 1: Приветствие -->
+    <section id="section1">
+      <h2 id="welcomeTitle">Welcome!</h2>
+      <p id="welcomeText">Today our topic is "DES Encryption Key Generator"</p>
+      <div class="btn-group">
+        <button class="btn" onclick="nextSection(2)">Next ➔</button>
+      </div>
+    </section>
+
+    <!-- Страница 2: Меню -->
+    <section id="section2" style="display:none;">
+      <h2 id="menuTitle">DES Encryption Learning</h2>
+      <ul class="menu-list">
+        <li><button class="menu-btn" onclick="openSection(3)">Theory of DES</button></li>
+        <li><button class="menu-btn" onclick="openSection(4)">Encryption Animation</button></li>
+        <li><button class="menu-btn" onclick="openSection(5)">Key Generation</button></li>
+        <li><button class="menu-btn" onclick="openSection(6)">Encryption Practice</button></li>
+      </ul>
+      <div class="btn-group">
+        <button class="btn" onclick="previousSection(1)">⬅ Back</button>
+      </div>
+    </section>
+
+    <!-- Страница 3: Теория DES -->
+    <section id="section3" style="display:none;">
+      <h2 id="theoryTitle">Theory of DES</h2>
+
+      <h3 id="historyTitle1">History of DES</h3>
+<p id="historyText1">DES was developed by IBM in the early 1970s and was adopted as a federal standard for the United States in 1977 by the National Institute of Standards and Technology (NIST). It was designed to provide a secure and efficient method for electronic data encryption. DES gained prominence as the standard encryption algorithm for the U.S. government, military, and various industries. It was widely used to secure sensitive data and communications.</p>
+<h3 id="historyTitle1">Introduction</h3>
+      <p id="historyText2">
+  Data Encryption Standard (DES) is a symmetric block cipher. By 'symmetric', we mean that the size of input text and output text (ciphertext) is same (64-bits). The 'block' here means that it takes group of bits together as input instead of encrypting the text bit by bit. Data encryption standard (DES) has been found vulnerable to very powerful attacks and therefore, it was replaced by Advanced Encryption Standard (AES).
+</p>
+
+<ul style="margin-top: 10px; margin-bottom: 20px; padding-left: 20px;">
+  <li>It is a block cipher that encrypts data in 64-bit blocks.</li>
+  <li>It takes a 64-bit plaintext input and generates a corresponding 64-bit ciphertext output.</li>
+  <li>The main key length is 64-bit which is transformed into 56-bits by skipping every 8th bit in the key.</li>
+  <li>It encrypts the text in 16 rounds where each round uses a 48-bit subkey.</li>
+  <li>This 48-bit subkey is generated from the 56-bit effective key.</li>
+  <li>The same algorithm and key are used for both encryption and decryption with minor changes.</li>
+</ul>
+
+      <h3 id="historyTitle3">Contributions and Modifications</h3>
+      <p id="historyText3">Despite its key size concerns, DES made significant contributions to the field of cryptography and paved the way for subsequent encryption algorithms. Various modifications and adaptations of DES were proposed to enhance its security. In conclusion, DES played a pivotal role in the history of cryptography, particularly during its era of dominance in the late 20th century. While its use significantly contributed to securing sensitive information, the evolution of technology prompted the adoption of more advanced encryption standards like AES.</p>
+
+      <h3 id="historyTitle4">Introduction</h3>
+      <p id="historyText4">DES is a symmetric key algorithm used for encrypting electronic data.</p>
+
+      <img src="img/1image.png" alt="DES History Image">
+
+      <p id="historyText5">The fundamental operation of DES involves taking a 64-bit block of plaintext as input and transforming it into a corresponding 64-bit block of ciphertext. The DES (Data Encryption Standard) process involves several steps, organized into a series of rounds within a Feistel network structure. Here’s a breakdown of the steps:</p>
+      <h3 id="historyTitle5">1. Initial Permutation (IP)</h3>
+      <p id="historyText6">The 64-bit plaintext block undergoes an initial permutation, where the positions of its bits are rearranged according to a predefined table.</p>
+
+      <img src="img/2image.png" alt="DES Working Image">
+
+      <h3 id="structureTitle">2. Key Generation:</h3>
+<p id="structureText">
+  The 56-bit key is expanded and divided into sixteen 48-bit subkeys, one for each round of encryption.
+</p>
+<ul style="margin-top: 10px; margin-bottom: 20px; padding-left: 20px;">
+  <li><strong>Initial Key:</strong> The process begins with a 64-bit key, which is the user-provided secret key used to initiate the encryption.</li>
+  <li><strong>Key Permutation and Compression:</strong> 8-bit is being dropped and the 56-bit key undergoes an initial permutation (PC1 permutation) and compression. During this step, certain bits are selected and rearranged according to a predefined table. The result is a 56-bit permutation of the original key.</li>
+</ul>
+
+      <img src="img/3image.png" alt="DES Structure Image">
+
+      <p id="encryptionText">
+  
+<ul style="margin-top: 10px; margin-bottom: 20px; padding-left: 20px;">
+  <li><strong>Key Splitting:</strong> The 56-bit permuted key is then split into two 28-bit halves: a left half (C0) and a right half (D0).</li>
+  <li><strong>Left Shift:</strong> In each round, both the left and right halves of the key are independently rotated or shifted by a certain number of bits, creating a new combination of bits.<br>
+      <code>shift_schedule = [1, 1, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 1]</code></li>
+  <li><strong>Concatenation and Compression:</strong> After the rotation, the left and right halves are concatenated and compressed to create a 48-bit round subkey for that specific round.</li>
+  <li><strong>Key Compression:</strong> The compression PC2 permutation changes the 56-bit key to the 48-bit key, which is used as a key for the corresponding round. Example: for round 1 we’ll use K1 and so on.</li>
+</ul>
+
+      <img src="img/4image.png" alt="DES Encryption Image">
+<ul style="margin-top: 10px; margin-bottom: 20px; padding-left: 20px;">
+
+  <li><strong>Round-Specific Subkey Generation:</strong> The key expansion process involves creating sixteen round-specific subkeys, one for each round of encryption. For C1 and D1 we’ll use C0 and D0, for C2 and D2 we’ll use C1 and D1, and so on till C15 and D15.</li>
+    <li><strong>Sixteen Subkeys:</strong> This process is repeated for each of the sixteen rounds, resulting in a set of sixteen 48-bit subkeys (K1, K2, …, K16).</li>
+</ul>
+
+      <h3 id="decryptionTitle">3. Rounds of Encryption:</h3>
+      <ul style="margin-top: 10px; margin-bottom: 20px; padding-left: 20px;">
+  <li>The data block is divided into two halves (L and R), and each round involves the transformation of one half based on the other half and the round key.</li>
+      <img src="img/5image.png" alt="DES Decryption Image">
+
+      <h3 id="keyGenerationTitle">Round 1</h3>
+      <ul style="margin-top: 10px; margin-bottom: 20px; padding-left: 20px;">
+  <li>The right half (R0) is subjected to an expansion operation, increasing its size (32-bit to 48-bit.)This expanded right half is then XORed (bitwise exclusive OR) with the round-specific subkey (Ki) derived from the key schedule.</li> 
+</ul>
+
+      <img src="img/6image.png" alt="DES Key Generation Image">
+<li>
+  <strong>Substitution (S-boxes):</strong> The result of the XOR operation is divided into <strong>eight 6-bit blocks</strong>. Each block is fed into a corresponding S-box (substitution box), which replaces it with a 4-bit output based on the S-box’s predefined substitution table. The outputs from all S-boxes are concatenated to form a <strong>32-bit output</strong>.
+</li>
+
+
+
+    <h3 id="roundFunctionTitle">Round Function</h3>
+<ul id="roundFunctionText" style="margin-top: 10px; margin-bottom: 20px; padding-left: 20px;">
+  <li><strong>Permutation (P-Box):</strong> The 32-bit output from the S-boxes is subjected to a fixed permutation (P-box permutation). This rearranges the bits according to a predetermined permutation table.</li>
+</ul>
+      <img src="img/7image.png" alt="DES Round Function Image">
+
+
+
+      <img src="img/8image.png" alt="DES Strength Image">
+<ul style="list-style-type: disc; color: black; margin-top: 10px; margin-bottom: 20px; padding-left: 20px;">
+  <li><strong>XOR with Left Half:</strong> The output of the permutation step is XORed with the original left half (L0).</li>
+  <li><strong>Swap Left and Right Halves:</strong> The result of the XOR operation becomes the new right half (R1), and the original right half (R0) 
+    becomes the new left half (L1). For round 2, we’ll repeat these steps with the respective key on L1 and R1, and so on.</li>
+  <li>The transformation is accomplished through a combination of substitution (using S-boxes), permutation, and bitwise operations.</li>
+  <li>The use of a different subkey for each round adds variability to the encryption process, enhancing security.</li>
+</ul>
+
+
+
+      <h3 id="replacementTitle">5. Final Permutation (FP):</h3>
+      <p id="replacementText">After the 16th round, the left and right halves are swapped one last time. The final result undergoes a <strong>final permutation </strong>(inverse of the initial permutation) to generate the <strong>64-bit block of ciphertext.</strong></p>
+
+      <img src="img/9image.png" alt="AES Replacement Image">
+
+      <div class="btn-group">
+  <button class="btn" onclick="previousSection(2)">⬅ Back</button>
+  <button class="btn" onclick="nextSection(4)">Next ➔</button>
+</div>
+    </section>
+    <!-- Страница 4: Анимация шифрования -->
+    <!-- Страница 4: Анимация шифрования -->
+<section id="section4" style="display:none;">
+  <h2 id="animationTitle">Encryption Animation</h2>
+
+  <!-- Полотно для анимации -->
+  <div style="text-align:center; margin-bottom: 20px;">
+    <canvas id="animationCanvas" width="700" height="700" style="background: url('img/animation_background.png') center/contain no-repeat; background-size: contain; background-repeat: no-repeat;"></canvas>
+  </div>
+
+  <!-- Кнопки управления анимацией -->
+  <div class="btn-group" style="margin-top: 20px; flex-wrap: wrap;">
+  <button class="btn" onclick="startAnimation()">▶ Start</button>
+        <button class="btn" onclick="stopAnimation()">⏸ Stop</button>
+        <button class="btn" onclick="backAnimation()">⏪ Reset</button>
+        <button class="btn" onclick="previousSection(3)">⬅ Back</button>
+        <button class="btn" onclick="nextSection(7)">Next ➔</button>
+
+</div>
+
+</section>
+
+
+
+    <!-- Страница 5: Генерация ключа -->
+    <!-- Страница 5: Генерация ключа -->
+<!-- Страница 5: Генерация ключа -->
+    <section id="section5" style="display:none;">
+      <h2 id="keyGenTitle">Key Generation</h2>
+    
+      <label for="inputKey">Enter 64-bit key (binary):</label>
+      <input type="text" id="inputKey" maxlength="64" placeholder="e.g. 101010... (64 bits)"
+             style="width: 100%; padding: 10px; font-size: 1rem; margin-top: 10px;">
+    
+      <button class="btn" onclick="generateDESKeys()" style="margin-top: 20px;">Generate Keys</button>
+    <span id="defaultKey" style="font-family: monospace; font-weight: bold; font-size: 1rem; user-select: text;">
+  <span style="user-select: none;">[</span>
+  1100101011110000111100001111000011110000111100001111000011110000
+  <span style="user-select: none;">]</span>
+</span>
+      <div style="display: flex; gap: 20px; align-items: flex-start; margin-top: 30px;">
+        <div id="keyOutput" style="flex: 1; font-family: monospace; font-size: 0.95rem;"></div>
+        <div id="keyImageContainer" style="flex: 1; display: none;">
+          <img src="assets/img/key_schedule.png" alt="Key Schedule Diagram" style="width: 100%; max-width: 350px; border: 1px solid #ccc; border-radius: 8px;">
+        </div>
+      </div>
+    
+      <div class="btn-group" style="margin-top: 30px;">
+        <button class="btn" onclick="previousSection(2)">⬅ Back</button>
+        <button class="btn" onclick="nextSection(7)">Next ➔</button>
+          </div>
+        </section>
+
+        <!-- Страница 8: Фото -->
+        <section id="section7" style="display:none;">
+          <h2 id="photoTitle">Key Generator</h2>
+          <div style="text-align:center; margin: 20px 0;">
+            
+          <img src="img/10image.png" alt="Generated Key Photo"
+     style="width: 100%; max-width: 1000px; height: auto; border: none; border-radius: 8px; display: block; margin: 0 auto;">
+          <div class="btn-group">
+        <button class="btn" onclick="previousSection(5)">⬅ Back</button>
+        <button class="btn" onclick="nextSection(8)">Next ➔</button>
+          </div>
+        </section>
+
+        <section id="section8" style="display:none;">
+            <div style="text-align:center; margin: 20px 0;">
+              
+            <img src="img/11image.png" alt="Generated Key Photo"
+       style="width: 100%; max-width: 1000px; height: auto; border: none; border-radius: 8px; display: block; margin: 0 auto;">
+            <div class="btn-group">
+          <button class="btn" onclick="previousSection(7)">⬅ Back</button>
+          <button class="btn" onclick="nextSection(9)">Next ➔</button>
+            </div>
+          </section>
+
+          <section id="section9" style="display:none;">
+            <h2 style="text-align: center; margin-bottom: 10px;"> 2. Permuted Choice 1 (PC-1)
+                </h2>
+          
+            <!-- Текстовое пояснение -->
+            <p style="text-align: center; font-size: 1.1rem; max-width: 1000px; margin: 0 auto 20px;">
+                The remaining 56 bits are permuted using a fixed table called PC-1.
+                The result is split into two 28-bit halves: C0 and D0.
+            </p>
+          
+            <!-- Видео -->
+            <div style="text-align:center; margin: 20px 0;">
+              <video controls style="width: 100%; max-width: 1000px; border-radius: 6px;">
+                <source src="video/keydropp.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          
+            <!-- Кнопки -->
+            <div class="btn-group">
+              <button class="btn" onclick="previousSection(8)">⬅ Back</button>
+              <button class="btn" onclick="nextSection(10)">Next ➔</button>
+            </div>
+          </section>
+
+          <section id="section10" style="display:none;">
+            <div style="text-align:center; margin: 20px 0;">
+              <p style="text-align: center; font-size: 1.1rem; max-width: 1000px; margin: 0 auto 20px;">
+      <strong>3. Left Shifts (Rotations)</strong><br>
+      In each of the 16 rounds, C and D are left-shifted by 1 or 2 bits, according to a predefined shift schedule.
+      This produces the values C1–C16 and D1–D16 for each round.
+    </p>
+            <div style="text-align:center; margin: 20px 0;">
+              <video controls style="width: 100%; max-width: 1000px; border-radius: 6px;">
+                <source src="video/shift.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          <button class="btn" onclick="previousSection(9)">⬅ Back</button>
+          <button class="btn" onclick="nextSection(11)">Next ➔</button>
+            </div>
+          </section>
+
+          <section id="section11" style="display:none;">
+            <div style="text-align:center; margin: 20px 0;">
+              
+            <img src="img/13image.png" alt="Generated Key Photo"
+       style="width: 100%; max-width: 1000px; height: auto; border: none; border-radius: 8px; display: block; margin: 0 auto;">
+            <div class="btn-group">
+          <button class="btn" onclick="previousSection(10)">⬅ Back</button>
+          <button class="btn" onclick="nextSection(12)">Next ➔</button>
+            </div>
+          </section>
+
+          <section id="section12" style="display:none;">
+            <div style="text-align:center; margin: 20px 0;">
+              
+            <img src="img/14image.png" alt="Generated Key Photo"
+       style="width: 100%; max-width: 1000px; height: auto; border: none; border-radius: 8px; display: block; margin: 0 auto;">
+            <div class="btn-group">
+          <button class="btn" onclick="previousSection(11)">⬅ Back</button>
+          <button class="btn" onclick="nextSection(2)">Next ➔</button>
+          
+            </div>
+          </section>
+           
+          
+
+
+
+
+
+
+    
+
+  
+
+
+   <!-- Страница 6: Практика шифрования -->
+<section id="section6" style="display:none;">
+  <h2 id="practiceTitle">Encryption Practice</h2>
+
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f8fc;
+      padding: 40px;
+    }
+
+    .container {
+      background: white;
+      border-radius: 16px;
+      padding: 30px;
+      max-width: 900px;
+      margin: auto;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      animation: fadeIn 0.6s ease;
+    }
+
+    h1 {
+      color: #2c3e50;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    label {
+      font-weight: 600;
+      display: block;
+      margin-top: 15px;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 12px;
+      margin-top: 8px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 12px 24px;
+      background-color: #2f47b5;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    button:hover {
+      background-color: #1f3390;
+    }
+
+    .step {
+      background: #eef3ff;
+      border-left: 6px solid #2f47b5;
+      padding: 20px;
+      margin-top: 25px;
+      border-radius: 10px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: slideIn 0.6s ease forwards;
+    }
+
+    .step h3 {
+      margin-top: 0;
+      margin-bottom: 12px;
+      color: #2f47b5;
+    }
+
+    .byte-block {
+      display: inline-block;
+      background: #d6e4ff;
+      color: #1c2b70;
+      padding: 4px 8px;
+      margin: 2px;
+      border-radius: 6px;
+      font-family: monospace;
+    }
+
+    .result-byte {
+      background: #b3ffd1;
+      color: #1a4f30;
+    }
+
+    .error {
+      color: red;
+      font-weight: bold;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    th, td {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #dbe8ff;
+    }
+
+    @keyframes slideIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: scale(0.97);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+  </style>
+
+  <div class="container">
+    <h1>🔐 DES Encryption Visualizer</h1>
+
+    <label for="plaintext">Enter Plaintext (8 characters):</label>
+    <input type="text" id="plaintext" maxlength="8" />
+
+    <label for="key">Enter Key (8 characters):</label>
+    <input type="text" id="key" maxlength="8" />
+
+    <button onclick="simulateDES()">Start Encryption</button>
+
+    <div id="steps"></div>
+  </div>
+
+  <div class="btn-group" style="margin-top: 30px;">
+    <button class="btn" onclick="previousSection(5)">⬅ Back</button>
+  </div>
+
+  <script>
+    function toBinaryArray(str) {
+      return str.split('').map(c => c.charCodeAt(0).toString(2).padStart(8, '0'));
+    }
+
+    function xorByteArrays(a, b) {
+      return a.map((bit, i) => {
+        const res = parseInt(bit, 2) ^ parseInt(b[i], 2);
+        return res.toString(2).padStart(8, '0');
+      });
+    }
+
+    function delay(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    async function simulateDES() {
+      const pt = document.getElementById("plaintext").value;
+      const key = document.getElementById("key").value;
+      const steps = document.getElementById("steps");
+      steps.innerHTML = "";
+
+      if (pt.length !== 8 || key.length !== 8) {
+        steps.innerHTML = "<div class='error'>❗ Please enter exactly 8 characters for both fields.</div>";
+        return;
+      }
+
+      const ptBinArr = toBinaryArray(pt);
+      const keyBinArr = toBinaryArray(key);
+      const xorResult = xorByteArrays(ptBinArr, keyBinArr);
+      const encrypted = xorResult.map(b => String.fromCharCode(parseInt(b, 2))).join('');
+      const base64 = btoa(encrypted);
+
+      let ptTable = `<table><tr><th>Char</th><th>ASCII</th><th>Binary</th></tr>`;
+      pt.split('').forEach((char, i) => {
+        ptTable += `<tr><td>${char}</td><td>${pt.charCodeAt(i)}</td><td><code>${ptBinArr[i]}</code></td></tr>`;
+      });
+      ptTable += `</table>`;
+
+      let keyTable = `<table><tr><th>Char</th><th>ASCII</th><th>Binary</th></tr>`;
+      key.split('').forEach((char, i) => {
+        keyTable += `<tr><td>${char}</td><td>${key.charCodeAt(i)}</td><td><code>${keyBinArr[i]}</code></td></tr>`;
+      });
+      keyTable += `</table>`;
+
+      await addStep("🔤 Step 1: Convert to Binary", `
+        <strong>Plaintext:</strong>${ptTable}<br><br>
+        <strong>Key:</strong>${keyTable}
+      `, steps);
+
+      await addStep("🔁 Step 2: XOR Byte by Byte", `
+        ${ptBinArr.map((bit, i) => `
+          <div>
+            <span class="byte-block">${bit}</span>
+            <span> ⊕ </span>
+            <span class="byte-block">${keyBinArr[i]}</span>
+            <span> = </span>
+            <span class="byte-block result-byte">${xorResult[i]}</span>
+          </div>
+        `).join('')}
+      `, steps);
+
+      await addStep("📦 Step 3: Convert to Base64", `
+        Encrypted Output: <code>${base64}</code>
+      `, steps);
+
+      await addStep("📘 Note", `
+        This demo shows how DES uses XOR operations at the bit level.
+        Real DES includes 16 rounds, permutations, and more complex logic.
+      `, steps);
+    }
+
+    async function addStep(title, content, container) {
+      const div = document.createElement("div");
+      div.className = "step";
+      div.innerHTML = `<h3>${title}</h3><p>${content}</p>`;
+      container.appendChild(div);
+      await delay(600);
+    }
+  </script>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+<!-- Страница 7: Презентация команды -->
+<section id="section7" style="display:none;">
+  <h2>DES encryption scheme</h2>
+  <div style="text-align:center; margin: 20px 0;">
+    <video width="100%" controls autoplay muted>
+      <source src="assets/video/team_presentation.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+  <div class="btn-group">
+    <button class="btn" onclick="previousSection(4)">⬅ Back</button>
+  </div>
+</section>
+
+
+
+  </div>
+
+
+<!-- ТЕЕЕСТТТТ -->
+       <!-- ТЕСТ -->
+<section id="section13" style="display:none;">
+  <div style="max-width: 1000px; margin: 0 auto; padding: 20px; text-align: left; font-family: sans-serif;">
+    <h2 style="text-align: center;">DES Quiz</h2>
+
+    <!-- Question 1 -->
+    <div>
+      <p><strong>1. What does DES stand for?</strong></p>
+      <label><input type="radio" name="q1" value="a"> Data Encryption Standard</label><br>
+      <label><input type="radio" name="q1" value="b"> Digital Encoding System</label><br>
+      <label><input type="radio" name="q1" value="c"> Double Encryption Scheme</label><br>
+      <label><input type="radio" name="q1" value="d"> Direct Encoding System</label>
+    </div>
+
+    <!-- Question 2 -->
+    <div style="margin-top: 20px;">
+      <p><strong>2. How many rounds are in the DES algorithm?</strong></p>
+      <label><input type="radio" name="q2" value="a"> 8</label><br>
+      <label><input type="radio" name="q2" value="b"> 10</label><br>
+      <label><input type="radio" name="q2" value="c"> 16</label><br>
+      <label><input type="radio" name="q2" value="d"> 32</label>
+    </div>
+
+    <!-- Question 3 -->
+    <div style="margin-top: 20px;">
+      <p><strong>3. What is the size of the DES key (after parity bits are removed)?</strong></p>
+      <label><input type="radio" name="q3" value="a"> 56 bits</label><br>
+      <label><input type="radio" name="q3" value="b"> 64 bits</label><br>
+      <label><input type="radio" name="q3" value="c"> 48 bits</label><br>
+      <label><input type="radio" name="q3" value="d"> 32 bits</label>
+    </div>
+
+    <!-- Question 4 -->
+    <div style="margin-top: 20px;">
+      <p><strong>4. What is the block size used in DES?</strong></p>
+      <label><input type="radio" name="q4" value="a"> 32 bits</label><br>
+      <label><input type="radio" name="q4" value="b"> 64 bits</label><br>
+      <label><input type="radio" name="q4" value="c"> 128 bits</label><br>
+      <label><input type="radio" name="q4" value="d"> 256 bits</label>
+    </div>
+
+    <!-- Question 5 -->
+    <div style="margin-top: 20px;">
+      <p><strong>5. What structure does DES use internally?</strong></p>
+      <label><input type="radio" name="q5" value="a"> SPN Network</label><br>
+      <label><input type="radio" name="q5" value="b"> Linear Feedback</label><br>
+      <label><input type="radio" name="q5" value="c"> Feistel Network</label><br>
+      <label><input type="radio" name="q5" value="d"> Hash Function</label>
+    </div>
+
+    <!-- Question 6 -->
+    <div style="margin-top: 20px;">
+      <p><strong>6. What is applied at the beginning of DES encryption?</strong></p>
+      <label><input type="radio" name="q6" value="a"> Final permutation</label><br>
+      <label><input type="radio" name="q6" value="b"> Initial permutation</label><br>
+      <label><input type="radio" name="q6" value="c"> XOR operation</label><br>
+      <label><input type="radio" name="q6" value="d"> Key scheduling</label>
+    </div>
+
+    <!-- Question 7 -->
+    <div style="margin-top: 20px;">
+      <p><strong>7. How many subkeys are generated during DES key scheduling?</strong></p>
+      <label><input type="radio" name="q7" value="a"> 8</label><br>
+      <label><input type="radio" name="q7" value="b"> 10</label><br>
+      <label><input type="radio" name="q7" value="c"> 16</label><br>
+      <label><input type="radio" name="q7" value="d"> 32</label>
+    </div>
+
+    <!-- Question 8 -->
+    <div style="margin-top: 20px;">
+      <p><strong>8. What operation is used after expansion in each round?</strong></p>
+      <label><input type="radio" name="q8" value="a"> AND</label><br>
+      <label><input type="radio" name="q8" value="b"> OR</label><br>
+      <label><input type="radio" name="q8" value="c"> XOR</label><br>
+      <label><input type="radio" name="q8" value="d"> NOT</label>
+    </div>
+
+    <!-- Question 9 -->
+    <div style="margin-top: 20px;">
+      <p><strong>9. Why was DES eventually replaced by AES?</strong></p>
+      <label><input type="radio" name="q9" value="a"> Too complex</label><br>
+      <label><input type="radio" name="q9" value="b"> Too slow</label><br>
+      <label><input type="radio" name="q9" value="c"> Vulnerable to attacks</label><br>
+      <label><input type="radio" name="q9" value="d"> Not used by NIST</label>
+    </div>
+
+    <!-- Question 10 -->
+    <div style="margin-top: 20px;">
+      <p><strong>10. Which step is done last in DES encryption?</strong></p>
+      <label><input type="radio" name="q10" value="a"> Initial permutation</label><br>
+      <label><input type="radio" name="q10" value="b"> Final permutation</label><br>
+      <label><input type="radio" name="q10" value="c"> Expansion</label><br>
+      <label><input type="radio" name="q10" value="d"> S-box substitution</label>
+    </div>
+
+    <!-- Question 11 -->
+    <div style="margin-top: 20px;">
+      <p><strong>11. What is the purpose of PC-1 in DES key generation?</strong></p>
+      <label><input type="radio" name="q11" value="a"> It expands the key</label><br>
+      <label><input type="radio" name="q11" value="b"> It selects 56 bits from the 64-bit key</label><br>
+      <label><input type="radio" name="q11" value="c"> It applies parity check</label><br>
+      <label><input type="radio" name="q11" value="d"> It generates subkeys</label>
+    </div>
+
+    <!-- Question 12 -->
+    <div style="margin-top: 20px;">
+      <p><strong>12. What operation is applied between C and D halves in key generation?</strong></p>
+      <label><input type="radio" name="q12" value="a"> Right rotation</label><br>
+      <label><input type="radio" name="q12" value="b"> Substitution</label><br>
+      <label><input type="radio" name="q12" value="c"> Left shift</label><br>
+      <label><input type="radio" name="q12" value="d"> XOR</label>
+    </div>
+
+    <!-- Question 13 -->
+    <div style="margin-top: 20px;">
+      <p><strong>13. What does PC-2 do in the key generation process?</strong></p>
+      <label><input type="radio" name="q13" value="a"> Generates 64-bit keys</label><br>
+      <label><input type="radio" name="q13" value="b"> Applies permutation and compression to generate 48-bit subkey</label><br>
+      <label><input type="radio" name="q13" value="c"> Mixes keys using XOR</label><br>
+      <label><input type="radio" name="q13" value="d"> Duplicates key bits</label>
+    </div>
+
+    <!-- Result -->
+    <div style="margin-top: 30px; text-align: center;">
+      <button class="btn" onclick="checkQuiz()">Check Answers</button>
+      <p id="result" style="margin-top: 20px; font-weight: bold;"></p>
+      <button class="btn" onclick="nextSection(2)">⬅ Back</button>
+    </div>
+  </div>
+</section>
+<section id="section14" style="display:none; max-width: 800px; margin: 20px auto; padding: 20px; font-family: sans-serif;">
+  <h2 style="text-align:center;">Your DES Quiz Results</h2>
+  <div id="resultsContainer"></div>
+  <div style="text-align:center; margin-top: 20px;">
+    <button onclick="backToQuiz()">Back to Quiz</button>
+
+    <script src="js/script.js" defer>
+  
+</script>
+  </div>
+</section>
+</body>
+</html>
+
+
+
